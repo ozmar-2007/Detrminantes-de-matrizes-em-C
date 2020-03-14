@@ -1,14 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h> 
 
-
-
-
-
-
-
-
-
 float **matrizDin(int l, int c)
 {
     int i;
@@ -23,13 +15,14 @@ float **matrizDin(int l, int c)
 float** suprimeLc(float **mat, int nMat, int l, int c)
 {
     int i, j;
-    float **matD = matrizDin(nMat, nMat);
+    float **matTmp = matrizDin(nMat, nMat);
+    float **matD = matrizDin(nMat-1, nMat-1);
     
     for(i=0; i<nMat; i++)
     {
         for(j=0; j<nMat; j++)
         {
-            matD[i][j] = mat[i][j];
+            matTmp[i][j] = mat[i][j];
         }
     }
 
@@ -37,15 +30,31 @@ float** suprimeLc(float **mat, int nMat, int l, int c)
     {
         for(j=0; j<nMat; j++)
         {
-            matD[i][j] = matD[i+1][j];
+            matTmp[i][j] = matTmp[i+1][j];
+        }
+    }
+   
+    for(i=0; i<nMat-1; i++)
+    {
+        for(j=c; j<nMat-1; j++)
+        {
+            matTmp[i][j] = matTmp[i][j+1];
         }
     }
     
+    for(i=0; i<nMat; i++)
+    {
+        free(matTmp[i]);
+    }
+    
+    free(matTemp);
+
+    
     for(i=0; i<nMat-1; i++)
     {
-        for(j=c; j<nMat; j++)
+        for(j=0; j<nMat-1; j++)
         {
-            matD[i][j] = matD[i][j+1];
+            matD[i][j] = matTmp[i][j];
         }
     }
 
@@ -92,10 +101,10 @@ void main()
 
     
 
-    for(i=0; i<5; i++)
+    for(i=0; i<4; i++)
     {
         printf("\n");
-        for(j=0; j<5; j++)
+        for(j=0; j<4; j++)
         {
             printf("%.1f  ", matD[i][j]);
         }
