@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 float **matrizDin(int l, int c);
-float** suprimeLc(float **mat, int nMat, int l, int c);
+float **suprimeLc(float **mat, int nMat, int l, int c);
 float determinante(float **mat, int nMat);
 
 int main()
